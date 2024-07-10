@@ -1,8 +1,10 @@
 # dsm-tracker
 
-# - Libraries Used -
+# Libraries Used
 
-# FrontEnd
+# Frontend
 
-    React Hook Form  - For Handling Forms
-    Reacting Routing Dom - For Routing
+1.  React Hook Form - For Handling Forms
+2.  Reacting Routing Dom - For Routing
+
+# Backend
