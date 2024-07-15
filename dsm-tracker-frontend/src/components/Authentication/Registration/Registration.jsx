@@ -4,6 +4,7 @@ import "./Registration.css";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { Box, Button, TextField, Typography } from "@mui/material";
 
 //Yup Schema Validation
 const schema = yup.object({
@@ -35,60 +36,80 @@ const Registration = () => {
   return (
     <div className="reg_form">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
-            id="name"
-            className="form_text_input"
-            type="text"
-            placeholder="Enter your name"
+        <Box
+          display={"flex"}
+          flexDirection={"column"}
+          maxWidth={400}
+          alignItems={"center"}
+          justifyContent={"center"}
+          margin={"auto"}
+          marginTop={5}
+          padding={3}
+          borderRadius={5}
+          boxShadow={"5px 5px 10px #ccc"}
+          sx={{
+            ":hover": {
+              boxShadow: "10px 10px 20px #ccc",
+            },
+          }}
+        >
+          <Typography variant="h2" padding={3} textAlign={"center"}>
+            Register
+          </Typography>
+          <TextField
+            margin="normal"
+            name="name"
             {...register("name")}
+            placeholder="Enter your name"
+            variant="outlined"
+            type="text"
           />
           {errors.name && <em className="form_error">{errors.name.message}</em>}
-        </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            className="form_text_input"
-            type="email"
-            placeholder="Enter your email"
+          <TextField
+            margin="normal"
+            name="email"
             {...register("email")}
+            placeholder="Enter your email"
+            variant="outlined"
+            type="email"
           />
           {errors.email && (
             <em className="form_error">{errors.email.message}</em>
           )}
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            className="form_text_input"
-            type="password"
-            placeholder="Enter your password"
+          <TextField
+            margin="normal"
+            name="password"
             {...register("password")}
+            placeholder="Enter your password"
+            variant="outlined"
+            type="password"
           />
           {errors.password && (
             <em className="form_error">{errors.password.message}</em>
           )}
-        </div>
-
-        <div>
-          <label htmlFor="cpassword">Confirm Password</label>
-          <input
-            id="cpassword"
-            className="form_text_input"
-            type="password"
-            placeholder="Enter confirm password"
+          <TextField
+            margin="normal"
+            name="cpassword"
             {...register("confirmPassword")}
+            placeholder="Enter confirm password"
+            variant="outlined"
+            type="password"
           />
           {errors.confirmPassword && (
             <em className="form_error">{errors.confirmPassword.message}</em>
           )}
-        </div>
-        <button className="search_button form_submit" type="submit">
-          Submit
-        </button>
+          <Button
+            sx={{ marginTop: 3, borderRadius: 3 }}
+            variant="contained"
+            color="warning"
+            type="submit"
+          >
+            Submit
+          </Button>
+          <Button sx={{ marginTop: 3 }} href="/login">
+            Back to Login
+          </Button>
+        </Box>
       </form>
     </div>
   );
