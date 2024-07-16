@@ -1,3 +1,5 @@
 dsm-tracker-frontend/node_modules/
 dsm-tracker-backend/node_modules/
 .DS_Store
+dsm-tracker-backend/.env
+dsm-tracker-backend/.env.test
