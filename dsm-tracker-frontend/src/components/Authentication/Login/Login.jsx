@@ -5,8 +5,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { Navigate, NavLink } from "react-router-dom";
+import { Navigate, NavLink, useLocation } from "react-router-dom";
 import SendIcon from "@mui/icons-material/Send";
+import { login } from "../../../services/userServices";
 
 //Yup Schema Validation
 const schema = yup.object({
@@ -18,15 +19,26 @@ const schema = yup.object({
 });
 
 const Login = () => {
+  const location = useLocation();
+  console.log("Login location", location);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-    <Navigate to="/" />;
+    try {
+      await login(data);
+      const { state } = location;
+      window.location = state ? state.from : "/";
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        console.log(error.response.data.message);
+      }
+    }
   };
 
   return (
@@ -68,6 +80,7 @@ const Login = () => {
             placeholder="Password"
             variant="outlined"
             type="password"
+            label="Password"
           />
           <p>{errors.password?.message}</p>
           <Button

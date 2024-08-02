@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Box, Button, TextField, Typography } from "@mui/material";
+import { signup } from "../../../services/userServices";
 
 //Yup Schema Validation
 const schema = yup.object({
@@ -29,8 +30,17 @@ const Registration = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   //handling submission data, like sending it to an api etc
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    try {
+      await signup(data);
+
+      window.location = "/";
+    } catch (err) {
+      if (err.response && err.response.status === 400) {
+        console.log(err.response.data.message);
+      }
+    }
   };
 
   return (
@@ -63,6 +73,7 @@ const Registration = () => {
             placeholder="Enter your name"
             variant="outlined"
             type="text"
+            label="Name"
           />
           {errors.name && <em className="form_error">{errors.name.message}</em>}
           <TextField
@@ -72,6 +83,7 @@ const Registration = () => {
             placeholder="Enter your email"
             variant="outlined"
             type="email"
+            label="Email"
           />
           {errors.email && (
             <em className="form_error">{errors.email.message}</em>
@@ -83,6 +95,7 @@ const Registration = () => {
             placeholder="Enter your password"
             variant="outlined"
             type="password"
+            label="Password"
           />
           {errors.password && (
             <em className="form_error">{errors.password.message}</em>
@@ -94,6 +107,7 @@ const Registration = () => {
             placeholder="Enter confirm password"
             variant="outlined"
             type="password"
+            label="Confirm Password"
           />
           {errors.confirmPassword && (
             <em className="form_error">{errors.confirmPassword.message}</em>
