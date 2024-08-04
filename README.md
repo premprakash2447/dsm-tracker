@@ -1,4 +1,5 @@
 # dsm-tracker
+DSM-Tracker is a simple web application that allows users to track their daily work status. It manages task efficiently for better user trackability.
 
 # Libraries Used
 
@@ -12,6 +13,5 @@
 6.  Axios Library to fetch API - npm install axios
 
 # Backend
-
 1. Cors - to fix cors error on api call in reactjs -- npm install cors
 2. Body Parser - npm install body-parser
